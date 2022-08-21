@@ -1,1 +1,2 @@
 # minichain
+minimalistic blockchain implementation
