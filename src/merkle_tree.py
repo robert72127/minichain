@@ -3,7 +3,9 @@ from hashlib import sha256
 import hashlib
 
 class Merkle_Node:
-
+    '''
+    Binary tree that stores hash of passed data in each node
+    '''
     def __init__(self, left, right, data):
         self.left = left
         self.right = right
@@ -19,7 +21,12 @@ class Merkle_Node:
         return Merkle_Node(self.left, self,right, self.type, self.data)
     
 class Merkle_Tree:
-
+    '''
+    Merkle tree is tree data structure used for data verification and synchronization,
+    Static class that builds tree of Merkle_Node's,
+    where each non-leaf node is a hash of it’s child nodes
+    and all the leaf nodes are at the same depth and are as far left as possible. 
+    '''
     @staticmethod
     def build(values):
         nodes = [ Merkle_Node(None, None, v) for v in values]
