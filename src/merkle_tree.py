@@ -1,10 +1,9 @@
 
 from hashlib import sha256
-import hashlib
 
 class Merkle_Node:
     '''
-    Binary tree that stores hash of passed data in each node
+    Binary Node that stores hash of passed data in each node
     '''
     def __init__(self, left, right, data):
         self.left = left
