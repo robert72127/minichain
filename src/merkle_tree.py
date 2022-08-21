@@ -24,7 +24,9 @@ class Merkle_Tree:
     Merkle tree is tree data structure used for data verification and synchronization,
     Static class that builds tree of Merkle_Node's,
     where each non-leaf node is a hash of it’s child nodes
-    and all the leaf nodes are at the same depth and are as far left as possible. 
+    and all the leaf nodes are at the same depth and are as far left as possible.
+
+    Used as per-block tree of all transactions included in that block. 
     '''
     @staticmethod
     def build(values):
