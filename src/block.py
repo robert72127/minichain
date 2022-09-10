@@ -1,42 +1,40 @@
 from hashlib import sha256
 
+from merkle_tree import Merkle_Tree
+
 class Header:
   '''
-  Header consist of sets of block metadata 
+  Header contains block metadata
   nonce -  counter used for pow algoritm
-  other args are self explanatory
+  merkle_root - root of merkle tree consisting of all transactions in the block
   '''
-  def __init__(self, version, prev_block_hash, merkle_root, timestamp, diff_target, nonce):
-    self.version = version
+  def __init__(self, prev_block_hash, merkle_root, nonce):
     self.prev_block_hash = prev_block_hash
     self.merkle_root = merkle_root
-    self.timestamp = timestamp
-    self. diff_target = diff_target
     self.nonce = nonce
+    self.generate_hash()
+
+  def generate_hash(self):
+     self.hash = sha256(self.prev_block_hash + self.merkle_root + self.nonce)
 
 
 class Block:
   '''
   Container data structure that aggregates transactions for inclusion in the public ledger
   args are self explanatory
-
-
-  Block is group of transactions
-
-  Each block
-  has a block header, a hash pointer to some transaction data, and a
-  hash pointer to the previous block in the sequence
-
   '''
-  def __init__(self, block_size, block_header, transaction_counter, transactions,):
-    self.block_size = block_size
-    self.block_header = block_header
-    self.block_counter = transaction_counter
-    self.block_transactions = transactions
+  def __init__(self,prev_block_hash, transactions, diff_target, prev):
+    self.previous = prev
+    self.prev_block_hash = prev_block_hash
+    self.transactions = transactions
+    self.merkle_tree = Merkle_Tree.build(self.transactions)
+    self.generate_block()
 
-  def encode(self):
-    '''
-    return hash sha256 of current block
-    '''
-    return(sha256("test".encode('utf-8')).hexdigest())
-  
+  def generate_block(self):
+    nonce = 0
+    header = Header(self.prev_block_hash, self.merkle_tree.data, nonce)
+    while header[0:self.diff_target] != [0 for i in target].join(''):
+      nonce += 1
+      header = Header(self.prev_block_hash, self.merkle_tree.data, nonce)
+    self.nonce = nonce
+    self.header = header
