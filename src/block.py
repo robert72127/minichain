@@ -33,7 +33,7 @@ class Block:
   def generate_block(self):
     nonce = 0
     header = Header(self.prev_block_hash, self.merkle_tree.data, nonce)
-    while header[0:self.diff_target] != [0 for i in target].join(''):
+    while header.hash[0:self.diff_target] != [0 for i in target].join(''):
       nonce += 1
       header = Header(self.prev_block_hash, self.merkle_tree.data, nonce)
     self.nonce = nonce
