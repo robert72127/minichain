@@ -34,4 +34,4 @@ class Wallet:
             signature = rsa.sign(message.encode(), self.private_key, 'SHA-1')
         
         #broadcast
-        self.closest_node.listen_transaction(self.public_key, other_public_keys, amounts signature)
+        self.closest_node.listen_transaction(self.public_key, other_public_keys, amounts, signature)
